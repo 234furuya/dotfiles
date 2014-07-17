@@ -1,0 +1,1 @@
+/home/furuya234/dotfiles/.vim
