@@ -86,7 +86,7 @@ set infercase
 " 文字がない場所にもカーソルを移動できるようにする
 set virtualedit=all
 " 変更中のファイルでも、保存しないで他のファイルを表示
-set hidden
+" set hidden
 " 新しく開く代わりにすでに開いてあるバッファを開く
 set switchbuf=useopen
 " 小文字の検索でも大文字も見つかるようにする
