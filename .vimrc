@@ -5,44 +5,47 @@ set nocompatible
 filetype off
 
 " neobundleでプラグインを管理
-if has('vim_starting')
 set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-call neobundle#rc(expand('~/.vim/bundle'))
-NeoBundle 'Shougo/neobundle.vim'
 
-" 以下のプラグインをバンドル
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'fukajun/nerdtree'
-NeoBundle 'hail2u/vim-css3-syntax'
-NeoBundle 'taichouchou2/html5.vim'
-NeoBundle 'taichouchou2/vim-javascript'
-NeoBundle 'kchmck/vim-coffee-script'
-NeoBundle 'ruby-matchit'
-NeoBundle 'vim-scripts/dbext.vim'
-NeoBundle 'taichouchou2/vim-rails'
-NeoBundle 'romanvbabenko/rails.vim'
-NeoBundle 'ujihisa/unite-rake'
-NeoBundle 'basyura/unite-rails'
-NeoBundle 'taq/vim-rspec'
-" シンタックス系プラグインをバンドル
-NeoBundle 'Shougo/neocomplcache'
-NeoBundle 'Shougo/neosnippet'
-" テーマ
-NeoBundle 'tomasr/molokai'
-NeoBundle 'jonathanfilip/vim-lucius'
-NeoBundle 'nanotech/jellybeans.vim'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'vim-scripts/twilight'
-" 編集履歴管理
-NeoBundle "sjl/gundo.vim"
+call neobundle#begin(expand('~/.vim/bundle/'))
+  NeoBundleFetch 'Shougo/neobundle.vim'
+  " 以下のプラグインをバンドル
+  NeoBundle 'fukajun/nerdtree'
+  NeoBundle 'Shougo/unite.vim'
+  NeoBundle 'Shougo/vimfiler'
+  NeoBundle 'scrooloose/syntastic'
+  NeoBundle 'hail2u/vim-css3-syntax'
+  NeoBundle 'taichouchou2/html5.vim'
+  NeoBundle 'kchmck/vim-coffee-script'
+  NeoBundle 'ruby-matchit'
+  NeoBundle 'vim-scripts/dbext.vim'
+  NeoBundle 'taichouchou2/vim-rails'
+  NeoBundle 'romanvbabenko/rails.vim'
+  NeoBundle 'ujihisa/unite-rake'
+  NeoBundle 'basyura/unite-rails'
+  " シンタックス系プラグインをバンドル
+  NeoBundle 'Shougo/neocomplcache'
+  NeoBundle 'Shougo/neosnippet'
+  NeoBundle 'pangloss/vim-javascript'
+  " テーマ
+  NeoBundle 'tomasr/molokai'
+  NeoBundle 'jonathanfilip/vim-lucius'
+  NeoBundle 'nanotech/jellybeans.vim'
+  NeoBundle 'w0ng/vim-hybrid'
+  NeoBundle 'vim-scripts/twilight'
+  " 編集履歴管理
+  NeoBundle "sjl/gundo.vim"
+call neobundle#end()
+
+
 set t_Co=256
 
 " 環境設定系
 " シンタックスハイライト
-syntax on
+syntax enable
+
+colorscheme desert
+
 " エンコード
 set encoding=utf8
 " ファイルエンコード
@@ -78,7 +81,7 @@ set wrap
 " 入力されているテキストの最大幅を無効にする
 set textwidth=0
 " 不可視文字を表示
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%,eol:↲
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
 " インデントをshiftwidthの倍数に丸める
 set shiftround
 " 補完の際の大文字小文字の区別しない
@@ -100,11 +103,15 @@ set incsearch
 " コマンド、検索パターンを10000個まで履歴に残す
 set history=10000
 " マウスモード有効
-set mouse=a
+" set mouse=a
 " xtermとscreen対応
 set ttymouse=xterm2
+" ステータスラインを常に表示
+set laststatus=2
 " コマンドを画面最下部に表示する
 set showcmd
+"" ステータスラインに文字コードと改行文字を表示する
+set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 " 入力モード中に素早くJJと入力した場合はESCとみなす
 inoremap jj <Esc>
 
@@ -136,6 +143,12 @@ autocmd! BufNewFile,BufRead *.sbt setfiletype scala
 augroup END
 autocmd BufWritePost *.php silent make | if len(getqflist()) != 1 | copen | else | cclose | endif
 
+" CoffeeScript用設定
+" vimにcoffeeファイルタイプを認識させる
+au BufRead,BufNewFile,BufReadPre *.coffee set filetype=coffee
+" インデントを設定
+autocmd FileType coffee setlocal sw=2 sts=2 ts=2 et
+
 set expandtab "タブ入力を複数の空白入力に置き換える
 set tabstop=2 "画面上でタブ文字が占める幅
 set shiftwidth=2 "自動インデントでずれる幅
@@ -144,3 +157,4 @@ set autoindent "改行時に前の行のインデントを継続する
 set smartindent "改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 
 
+NeoBundleCheck

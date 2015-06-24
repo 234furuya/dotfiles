@@ -6,3 +6,5 @@
 	cm = commit
 	st = status
 	co = checkout
+[color]
+	ui = true
