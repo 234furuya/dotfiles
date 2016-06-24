@@ -114,3 +114,4 @@ if ! shopt -oq posix; then
   fi
 fi
 [ -r /home/furuya234/.byobu/prompt ] && . /home/furuya234/.byobu/prompt   #byobu-prompt#
+

@@ -11,8 +11,6 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   NeoBundleFetch 'Shougo/neobundle.vim'
   " 以下のプラグインをバンドル
   NeoBundle 'fukajun/nerdtree'
-  NeoBundle 'Shougo/unite.vim'
-  NeoBundle 'Shougo/vimfiler'
   NeoBundle 'scrooloose/syntastic'
   NeoBundle 'hail2u/vim-css3-syntax'
   NeoBundle 'taichouchou2/html5.vim'
@@ -21,11 +19,8 @@ call neobundle#begin(expand('~/.vim/bundle/'))
   NeoBundle 'vim-scripts/dbext.vim'
   NeoBundle 'taichouchou2/vim-rails'
   NeoBundle 'romanvbabenko/rails.vim'
-  NeoBundle 'ujihisa/unite-rake'
-  NeoBundle 'basyura/unite-rails'
   " シンタックス系プラグインをバンドル
   NeoBundle 'Shougo/neocomplcache'
-  NeoBundle 'Shougo/neosnippet'
   NeoBundle 'pangloss/vim-javascript'
   " テーマ
   NeoBundle 'tomasr/molokai'
@@ -129,6 +124,11 @@ vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
 omap <silent> <C-e>      :NERDTreeToggle<CR>
 imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
 cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
+
+" 入力モード中に素早くqqと押すとシングルクォーテーション
+inoremap qq '
+" 入力モード中に素早くwqと押すとダブルクォーテーション
+inoremap wq "
 
 " Ruby用設定
 " :makeでRuby構文チェック
