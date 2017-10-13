@@ -1,7 +1,8 @@
-ln -s  ~/dotfiles/.vimrc ~/.vimrc
-ln -s ~/dotfiles/.gvimrc ~/.gvimrc
-ln -s ~/dotfiles/.bashrc ~/.bashrc
-ln -s ~/dotfiles/.bash_profile ~/.bash_profile
-ln -s ~/dotfiles/.vim ~/.vim
-ln -s ~/dotfiles/.gitconfig ~/.gitconfig
-ln -s ~/dotfiles/.gitignore_global ~/.gitignore_global
+ln -fs  ~/dotfiles/.vimrc ~/.vimrc
+ln -fs ~/dotfiles/.gvimrc ~/.gvimrc
+ln -fs ~/dotfiles/.bashrc ~/.bashrc
+ln -fs ~/dotfiles/.bash_profile ~/.bash_profile
+ln -fs ~/dotfiles/.vim ~/.vim
+ln -fs ~/dotfiles/.gitconfig ~/.gitconfig
+ln -fs ~/dotfiles/.gitignore_global ~/.gitignore_global
+

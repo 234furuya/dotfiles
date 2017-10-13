@@ -76,7 +76,7 @@ set wrap
 " 入力されているテキストの最大幅を無効にする
 set textwidth=0
 " 不可視文字を表示
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+set listchars=tab:>-,trail:-,extends:>,precedes:<,nbsp:%
 " インデントをshiftwidthの倍数に丸める
 set shiftround
 " 補完の際の大文字小文字の区別しない
@@ -134,7 +134,7 @@ inoremap wq "
 " :makeでRuby構文チェック
 au FileType ruby setlocal makeprg=ruby\ -c\ %
 au FileType ruby setlocal errorformat=%m\ in\ %f\ on\ line\ %l
- 
+
 " Scala用設定
 " ファイルタイプの追加
 augroup filetypedetect
@@ -156,5 +156,7 @@ set softtabstop=2 "連続した空白に対してタブキーやバックスペ�
 set autoindent "改行時に前の行のインデントを継続する
 set smartindent "改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 
+" 文末の余計な空白を保存時に取り除く
+autocmd BufWritePre * :%s/\s\+$//ge
 
 NeoBundleCheck
