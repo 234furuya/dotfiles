@@ -1,42 +1,50 @@
 " vi互換ではなくVimのデフォルト設定にする
-set nocompatible
+"set nocompatible
 
 " 一旦ファイルタイプを無効化
-filetype off
+" filetype off
 
-" neobundleでプラグインを管理
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+"dein Scripts-----------------------------
+if &compatible
+  set nocompatible               " Be iMproved
+endif
 
-call neobundle#begin(expand('~/.vim/bundle/'))
-  NeoBundleFetch 'Shougo/neobundle.vim'
-  " 以下のプラグインをバンドル
-  NeoBundle 'fukajun/nerdtree'
-  NeoBundle 'Shougo/unite.vim'
-  NeoBundle 'Shougo/vimfiler'
-  NeoBundle 'scrooloose/syntastic'
-  NeoBundle 'hail2u/vim-css3-syntax'
-  NeoBundle 'taichouchou2/html5.vim'
-  NeoBundle 'kchmck/vim-coffee-script'
-  NeoBundle 'ruby-matchit'
-  NeoBundle 'vim-scripts/dbext.vim'
-  NeoBundle 'taichouchou2/vim-rails'
-  NeoBundle 'romanvbabenko/rails.vim'
-  NeoBundle 'ujihisa/unite-rake'
-  NeoBundle 'basyura/unite-rails'
-  " シンタックス系プラグインをバンドル
-  NeoBundle 'Shougo/neocomplcache'
-  NeoBundle 'Shougo/neosnippet'
-  NeoBundle 'pangloss/vim-javascript'
-  " テーマ
-  NeoBundle 'tomasr/molokai'
-  NeoBundle 'jonathanfilip/vim-lucius'
-  NeoBundle 'nanotech/jellybeans.vim'
-  NeoBundle 'w0ng/vim-hybrid'
-  NeoBundle 'vim-scripts/twilight'
-  " 編集履歴管理
-  NeoBundle "sjl/gundo.vim"
-call neobundle#end()
+" Required:
+ set runtimepath+=/home/vagrant/.cache/dein/repos/github.com/Shougo/dein.vim
 
+" Required:
+if dein#load_state('/home/vagrant/.cache/dein')
+  call dein#begin('/home/vagrant/.cache/dein')
+
+  " Let dein manage dein
+  " Required:
+  call dein#add('/home/vagrant/.cache/dein/repos/github.com/Shougo/dein.vim')
+
+  " Add or remove your plugins here:
+  call dein#add('Shougo/neosnippet.vim')
+  call dein#add('Shougo/neosnippet-snippets')
+
+  " You can specify revision/branch/tag.
+  call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
+
+  call dein#add('fukajun/nerdtree')
+  call dein#add('Shougo/neocomplcache')
+  call dein#add('scrooloose/syntastic')
+
+  " Required:
+  call dein#end()
+  call dein#save_state()
+  endif
+
+  " Required:
+  filetype plugin indent on
+  syntax enable
+
+  " If you want to install not installed plugins on startup.
+  if dein#check_install()
+    call dein#install()
+  endif
+"End dein Scripts-------------------------
 
 set t_Co=256
 
@@ -81,7 +89,7 @@ set wrap
 " 入力されているテキストの最大幅を無効にする
 set textwidth=0
 " 不可視文字を表示
-set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+set listchars=tab:>-,trail:-,extends:>,precedes:<,nbsp:%
 " インデントをshiftwidthの倍数に丸める
 set shiftround
 " 補完の際の大文字小文字の区別しない
@@ -130,11 +138,16 @@ omap <silent> <C-e>      :NERDTreeToggle<CR>
 imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
 cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
 
+" 入力モード中に素早くqqと押すとシングルクォーテーション
+inoremap qq '
+" 入力モード中に素早くwqと押すとダブルクォーテーション
+inoremap wq "
+
 " Ruby用設定
 " :makeでRuby構文チェック
 au FileType ruby setlocal makeprg=ruby\ -c\ %
 au FileType ruby setlocal errorformat=%m\ in\ %f\ on\ line\ %l
- 
+
 " Scala用設定
 " ファイルタイプの追加
 augroup filetypedetect
@@ -156,31 +169,14 @@ set softtabstop=2 "連続した空白に対してタブキーやバックスペ�
 set autoindent "改行時に前の行のインデントを継続する
 set smartindent "改行時に入力された行の末尾に合わせて次の行のインデントを増減する
 
-"" 文字数カウントをステータスラインに表示
-augroup char_counter
-  autocmd!
-  autocmd BufCreate,BufEnter * call s:char_counter_initialize()
-  autocmd BufNew,BufEnter,BufWrite,InsertLeave * call s:char_counter_update()
-augroup END
-function! s:char_counter_initialize()
-  if !exists('b:char_counter_count')
-    let b:char_counter_count = 0
-  endif
-endfunction
-function! s:char_counter_update()
-  let b:char_counter_count = s:char_counter()
-endfunction
-function! s:char_counter()
-  let result = 0
-  for linenum in range(0, line('$'))
-    let line = getline(linenum)
-    let result += strlen(substitute(line, '.', 'x', 'g'))
-  endfor
-  return result
-endfunction
-if !exists('b:char_counter_count')
-  let b:char_counter_count = 0
-endif
-set stl+=\ %{b:char_counter_count}
+" 文末の余計な空白を保存時に取り除く
+" autocmd BufWritePre * :%s/\s\+$//ge
 
-NeoBundleCheck
+" necomplache(自動補完ツール)の設定
+" 起動時に自動で起動
+let g:neocomplcache_enable_at_startup = 1
+" 大文字小文字の区別を無視
+let g:neocomplcache_enable_smart_case = 1
+" スネークケース補完有効化
+let g:neocomplcache_enable_underbar_completion = 1
+
