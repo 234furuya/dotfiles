@@ -31,6 +31,8 @@ if dein#load_state('/home/vagrant/.cache/dein')
   call dein#add('Shougo/neocomplcache')
   call dein#add('scrooloose/syntastic')
 
+  call dein#add('kchmck/vim-coffee-script')
+
   " Required:
   call dein#end()
   call dein#save_state()
@@ -161,6 +163,9 @@ autocmd BufWritePost *.php silent make | if len(getqflist()) != 1 | copen | else
 au BufRead,BufNewFile,BufReadPre *.coffee set filetype=coffee
 " インデントを設定
 autocmd FileType coffee setlocal sw=2 sts=2 ts=2 et
+
+" JQueryシンタックス
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
 
 set expandtab "タブ入力を複数の空白入力に置き換える
 set tabstop=2 "画面上でタブ文字が占める幅
