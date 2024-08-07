@@ -176,7 +176,7 @@ set smartindent "改行時に入力された行の末尾に合わせて次の行
 set paste "ペースト時の改行を抑止
 
 " 文末の余計な空白を保存時に取り除く
-" autocmd BufWritePre * :%s/\s\+$//ge
+autocmd BufWritePre * :%s/\s\+$//ge
 
 " necomplache(自動補完ツール)の設定
 " 起動時に自動で起動
