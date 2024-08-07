@@ -1,5 +1,5 @@
 " vi互換ではなくVimのデフォルト設定にする
-"set nocompatible
+" set nocompatible
 
 " 一旦ファイルタイプを無効化
 " filetype off
@@ -30,6 +30,8 @@ if dein#load_state('/home/vagrant/.cache/dein')
   call dein#add('fukajun/nerdtree')
   call dein#add('Shougo/neocomplcache')
   call dein#add('scrooloose/syntastic')
+
+  call dein#add('kchmck/vim-coffee-script')
 
   " Required:
   call dein#end()
@@ -162,15 +164,19 @@ au BufRead,BufNewFile,BufReadPre *.coffee set filetype=coffee
 " インデントを設定
 autocmd FileType coffee setlocal sw=2 sts=2 ts=2 et
 
+" JQueryシンタックス
+au BufRead,BufNewFile jquery.*.js set ft=javascript syntax=jquery
+
 set expandtab "タブ入力を複数の空白入力に置き換える
 set tabstop=2 "画面上でタブ文字が占める幅
 set shiftwidth=2 "自動インデントでずれる幅
 set softtabstop=2 "連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
 set autoindent "改行時に前の行のインデントを継続する
 set smartindent "改行時に入力された行の末尾に合わせて次の行のインデントを増減する
+set paste "ペースト時の改行を抑止
 
 " 文末の余計な空白を保存時に取り除く
-" autocmd BufWritePre * :%s/\s\+$//ge
+autocmd BufWritePre * :%s/\s\+$//ge
 
 " necomplache(自動補完ツール)の設定
 " 起動時に自動で起動
