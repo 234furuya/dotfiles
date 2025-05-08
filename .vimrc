@@ -1,8 +1,8 @@
 " vi互換ではなくVimのデフォルト設定にする
-" set nocompatible
+set nocompatible
 
 " 一旦ファイルタイプを無効化
-" filetype off
+filetype off
 
 "dein Scripts-----------------------------
 if &compatible
@@ -111,7 +111,7 @@ set incsearch
 " 検索結果をハイライト表示
 :set hlsearch
 " コマンド、検索パターンを10000個まで履歴に残す
-set history=10000
+set history=1000
 " マウスモード有効
 " set mouse=a
 " xtermとscreen対応
@@ -139,6 +139,9 @@ vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
 omap <silent> <C-e>      :NERDTreeToggle<CR>
 imap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
 cmap <silent> <C-e> <C-u>:NERDTreeToggle<CR>
+
+" 隠しファイルをデフォルト表示
+let NERDTreeShowHidden = 1
 
 " 入力モード中に素早くqqと押すとシングルクォーテーション
 inoremap qq '
@@ -173,7 +176,8 @@ set shiftwidth=2 "自動インデントでずれる幅
 set softtabstop=2 "連続した空白に対してタブキーやバックスペースキーでカーソルが動く幅
 set autoindent "改行時に前の行のインデントを継続する
 set smartindent "改行時に入力された行の末尾に合わせて次の行のインデントを増減する
-set paste "ペースト時の改行を抑止
+" set pasteすると自動補完が効かないので必要なときにset paste⇔set nopasteする
+" set paste "ペースト時の改行を抑止
 
 " 文末の余計な空白を保存時に取り除く
 autocmd BufWritePre * :%s/\s\+$//ge
@@ -185,4 +189,5 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 " スネークケース補完有効化
 let g:neocomplcache_enable_underbar_completion = 1
-
+" 左右移動で行マタギ
+" set whichwrap=b,s,h,l,<,>,[,],~
