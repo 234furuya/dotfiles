@@ -124,7 +124,6 @@ set showcmd
 set statusline=%<%f\ %m%r%h%w%{'['.(&fenc!=''?&fenc:&enc).']['.&ff.']'}%=%l,%c%V%8P
 " 入力モード中に素早くJJと入力した場合はESCとみなす
 inoremap jj <Esc>
-
 " j, k による移動を折り返されたテキストでも自然に振る舞うように変更
 nnoremap j gj
 nnoremap k gk
@@ -133,6 +132,12 @@ vnoremap v $h
 " TABにて対応ペアにジャンプ
 nnoremap &lt;Tab&gt; %
 vnoremap &lt;Tab&gt; %
+" [,]で文末、文頭にジャンプ
+nnoremap [ ^
+vnoremap [ ^
+nnoremap ] $
+vnoremap ] $
+
 " NERDTreeをショートカット起動
 nmap <silent> <C-e>      :NERDTreeToggle<CR>
 vmap <silent> <C-e> <Esc>:NERDTreeToggle<CR>
