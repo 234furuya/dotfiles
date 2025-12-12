@@ -9,6 +9,23 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
+" dein.vimのインストール
+let $CACHE = expand('~/.cache')
+if !($CACHE->isdirectory())
+  call mkdir($CACHE, 'p')
+endif
+if &runtimepath !~# '/dein.vim'
+  let s:dir = 'dein.vim'->fnamemodify(':p')
+  if !(s:dir->isdirectory())
+    let s:dir = $CACHE .. '/dein/repos/github.com/Shougo/dein.vim'
+    if !(s:dir->isdirectory())
+      execute '!git clone https://github.com/Shougo/dein.vim' s:dir
+    endif
+  endif
+  execute 'set runtimepath^='
+        \ .. s:dir->fnamemodify(':p')->substitute('[/\\]$', '', '')
+endif
+
 " Required:
  set runtimepath+=/home/vagrant/.cache/dein/repos/github.com/Shougo/dein.vim
 
@@ -27,7 +44,8 @@ if dein#load_state('/home/vagrant/.cache/dein')
   " You can specify revision/branch/tag.
   call dein#add('Shougo/vimshell', { 'rev': '3787e5' })
 
-  call dein#add('fukajun/nerdtree')
+  " call dein#add('fukajun/nerdtree')
+  call dein#add('preservim/nerdtree')
   call dein#add('Shougo/neocomplcache')
   call dein#add('scrooloose/syntastic')
 
