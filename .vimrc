@@ -46,6 +46,9 @@ if dein#load_state('/home/vagrant/.cache/dein')
 
   " call dein#add('fukajun/nerdtree')
   call dein#add('preservim/nerdtree')
+  " nerdtreeにgrepを追加したい
+  call dein#add('MarSoft/nerdtree-grep-plugin')
+
   call dein#add('Shougo/neocomplcache')
   call dein#add('scrooloose/syntastic')
 
@@ -73,6 +76,7 @@ set t_Co=256
 syntax enable
 
 colorscheme desert
+
 
 " エンコード
 set encoding=utf8
@@ -155,6 +159,7 @@ nnoremap [ ^
 vnoremap [ ^
 nnoremap ] $
 vnoremap ] $
+
 
 " NERDTreeをショートカット起動
 nmap <silent> <C-e>      :NERDTreeToggle<CR>
